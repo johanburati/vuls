@@ -797,3 +797,7 @@ func (l *base) parseLsOf(stdout string) map[string]string {
 	}
 	return portPid
 }
+
+func (l *base) setLogger(logger *logrus.Entry) {
+	l.log = logger
+}

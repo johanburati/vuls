@@ -3,7 +3,6 @@ package scan
 import (
 	"github.com/future-architect/vuls/config"
 	"github.com/future-architect/vuls/models"
-	"github.com/future-architect/vuls/util"
 )
 
 // inherit OsTypeInterface
@@ -24,7 +23,6 @@ func newOracle(c config.ServerInfo) *oracle {
 			sudo: rootPrivOracle{},
 		},
 	}
-	r.log = util.NewCustomLogger(c)
 	r.setServerInfo(c)
 	return r
 }

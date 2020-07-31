@@ -3,7 +3,6 @@ package scan
 import (
 	"github.com/future-architect/vuls/config"
 	"github.com/future-architect/vuls/models"
-	"github.com/future-architect/vuls/util"
 	"golang.org/x/xerrors"
 )
 
@@ -25,7 +24,6 @@ func newAmazon(c config.ServerInfo) *amazon {
 			sudo: rootPrivAmazon{},
 		},
 	}
-	r.log = util.NewCustomLogger(c)
 	r.setServerInfo(c)
 	return r
 }

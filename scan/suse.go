@@ -29,7 +29,6 @@ func newSUSE(c config.ServerInfo) *suse {
 			},
 		},
 	}
-	r.log = util.NewCustomLogger(c)
 	r.setServerInfo(c)
 	return r
 }

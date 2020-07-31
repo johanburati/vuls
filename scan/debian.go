@@ -31,7 +31,6 @@ func newDebian(c config.ServerInfo) *debian {
 			},
 		},
 	}
-	d.log = util.NewCustomLogger(c)
 	d.setServerInfo(c)
 	return d
 }

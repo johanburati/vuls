@@ -3,7 +3,6 @@ package scan
 import (
 	"github.com/future-architect/vuls/config"
 	"github.com/future-architect/vuls/models"
-	"github.com/future-architect/vuls/util"
 )
 
 // inherit OsTypeInterface
@@ -26,7 +25,6 @@ func newPseudo(c config.ServerInfo) *pseudo {
 			},
 		},
 	}
-	d.log = util.NewCustomLogger(c)
 	d.setServerInfo(c)
 	return d
 }

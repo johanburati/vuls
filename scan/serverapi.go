@@ -12,6 +12,7 @@ import (
 	"github.com/future-architect/vuls/models"
 	"github.com/future-architect/vuls/report"
 	"github.com/future-architect/vuls/util"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/xerrors"
 )
 
@@ -39,6 +40,7 @@ type osTypeInterface interface {
 	detectPlatform()
 	detectIPSs()
 	getPlatform() models.Platform
+	setLogger(*logrus.Entry)
 
 	checkScanMode() error
 	checkDeps() error
@@ -106,6 +108,7 @@ func detectOS(c config.ServerInfo) (osType osTypeInterface) {
 
 	if itsMe, osType, _ = detectPseudo(c); itsMe {
 		util.Log.Debugf("Pseudo")
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
@@ -118,26 +121,31 @@ func detectOS(c config.ServerInfo) (osType osTypeInterface) {
 
 	if itsMe {
 		util.Log.Debugf("Debian like Linux. Host: %s:%s", c.Host, c.Port)
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
 	if itsMe, osType = detectRedhat(c); itsMe {
 		util.Log.Debugf("Redhat like Linux. Host: %s:%s", c.Host, c.Port)
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
 	if itsMe, osType = detectSUSE(c); itsMe {
 		util.Log.Debugf("SUSE Linux. Host: %s:%s", c.Host, c.Port)
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
 	if itsMe, osType = detectFreebsd(c); itsMe {
 		util.Log.Debugf("FreeBSD. Host: %s:%s", c.Host, c.Port)
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
 	if itsMe, osType = detectAlpine(c); itsMe {
 		util.Log.Debugf("Alpine. Host: %s:%s", c.Host, c.Port)
+		osType.setLogger(util.NewCustomLogger(c))
 		return
 	}
 
